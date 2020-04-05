@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class UhfPlugin {
-  static const MethodChannel _channel =
-      const MethodChannel('uhf_plugin');
+  static const MethodChannel _channel = const MethodChannel('uhf_plugin');
 
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
-  static const EventChannel connectedStatusStream = EventChannel('ConnectedStatus');
+  static const EventChannel connectedStatusStream =
+      EventChannel('ConnectedStatus');
   static const EventChannel tagsStatusStream = EventChannel('TagsStatus');
 
   static Future<bool> get isStarted async {
@@ -41,9 +41,8 @@ class UhfPlugin {
   static Future<bool> get connect async {
     return _channel.invokeMethod('connect');
   }
+
   static Future<bool> get isConnected async {
     return _channel.invokeMethod('isConnected');
   }
-
-
 }

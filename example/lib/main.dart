@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
 
   void updateIsConnected(dynamic isConnected) {
     //setState(() {
-      _isConnected = isConnected;
+    _isConnected = isConnected;
     //});
   }
 
@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: <Widget>[
               Text('Running on: $_platformVersion'),
-               RaisedButton(
+              RaisedButton(
                   child: Text('Call connect'),
                   onPressed: () async {
                     await UhfPlugin.connect;
