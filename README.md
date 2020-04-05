@@ -1,27 +1,60 @@
 # uhf_plugin
 
-A new flutter plugin project.
+A flutter plugin for Tablet Alps ax6737 to read UHF Cards.
 
 #### Library Pub link
-https://pub.dev/packages/acs_nfc/
+https://pub.dev/packages/uhf_plugin
+
 
 ### Getting Started
 
+##### In your Gradle exclude Flutter so files because libary is working in 32bit mode
+##### Only use release apk because running from IDE will not exclude 64bit files
+    `packagingOptions {
+        exclude 'lib/arm64-v8a/libflutter.so'
+        exclude 'lib/arm64-v8a/libapp.so'
+    }`
+
 - Import the library:
-   `import 'package:acs_nfc/acs_nfc.dart';`
+   `import 'package:uhf_plugin/uhf_plugin.dart';`
 
-- Open connection the connection
+- Open connection to the UHF reader
 
-    `await AcsNfc.openConnection(ip: '192.168.137.1', port: '8001');`
+    `await UhfPlugin.connect`
 
-- Listen to connection Status
+- Check if is the reader connected
 
-    `AcsNfc.connectionStatusStream.receiveBroadcastStream().listen(nfcConnectionStatus);`
+    `await UhfPlugin.isConnected;`
 
-- List to Nfc data
+- Start reading data
 
-    `AcsNfc.nfcDataStream.receiveBroadcastStream().listen(nfcData);`
+    `await UhfPlugin.start;`
     
-- Data format is:
+- Is started reading
 
-   `{"nfcBytes":"","nfcId":""}`
+   `await UhfPlugin.isStarted;`
+
+- Stop Reading
+
+   `await UhfPlugin.stop;`
+
+- Close the connection
+
+   `await UhfPlugin.close;`
+
+- Clear cached data for the reader
+
+   `await UhfPlugin.clearData;`
+
+- Is Empty Tags
+
+   `await UhfPlugin.isEmptyTags;`
+
+- Listen to connection status
+
+   `UhfPlugin.connectedStatusStream.receiveBroadcastStream().listen(updateIsConnected);`
+
+- Listen to tags status
+
+   `UhfPlugin.tagsStatusStream.receiveBroadcastStream().listen(updateTags);`
+
