@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:uhf_plugin/uhf_plugin.dart';
+import 'package:uhf_plugin/tag_epc.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,10 +48,10 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  List<String> _data = ['--'];
+  List<TagEpc> _data = [];
   void updateTags(dynamic result) {
     setState(() {
-      _data.add('$result');
+    _data = TagEpc.parseTags(result);
     });
   }
 
@@ -123,7 +124,7 @@ class _MyAppState extends State<MyApp> {
                   }),
               Text('UHF Reader isEmptyTags:$_isEmptyTags'),
               Text('UHF Reader isConnected:$_isConnected'),
-              ..._data.map((text) => Text('Status - UHF Tags: $text')),
+              ..._data.map((TagEpc tag) => Text('UHF Tag - Count:${tag.count} EPC:${tag.epc}')),
             ],
           ),
         ),

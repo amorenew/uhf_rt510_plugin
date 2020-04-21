@@ -53,11 +53,11 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(new UHFPlugin());
         UHFHelper.getInstance().init(flutterPluginBinding.getApplicationContext(), new UHFListener() {
             @Override
-            public void onRead(ArrayList<Map<String, Object>> tagsList) {
-                for (Map<String, Object> map : tagsList) {
-                    String tag = TagKey.getTag(map);
-                    tagsStatus.onNext(tag);
-                }
+            public void onRead(String tagsJson) {
+//                for (Map<String, Object> map : tagsList) {
+//                    String tag = TagKey.getTag(map);
+                    tagsStatus.onNext(tagsJson);
+//                }
             }
 
             @Override
@@ -84,11 +84,11 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
 
         UHFHelper.getInstance().init(registrar.context(), new UHFListener() {
             @Override
-            public void onRead(ArrayList<Map<String, Object>> tagsList) {
-                for (Map<String, Object> map : tagsList) {
-                    String tag = TagKey.getTag(map);
-                    tagsStatus.onNext(tag);
-                }
+            public void onRead(String tagsJson) {
+//                for (Map<String, Object> map : tagsList) {
+//                    String tag = TagKey.getTag(map);
+                tagsStatus.onNext(tagsJson);
+//                }
             }
 
             @Override

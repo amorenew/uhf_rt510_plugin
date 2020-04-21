@@ -6,6 +6,10 @@ import com.handheld.UHFLonger.UHFLongerManager;
 import com.handheld.UHFLongerDemo.EPC;
 import com.handheld.UHFLongerDemo.MyApplication;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -165,15 +169,29 @@ public class UHFHelper {
         }
         ArrayList<Map<String, Object>> listMap = new ArrayList<>();
         int idcount = 1;
+
+        final JSONArray jsonArray = new JSONArray();
+
         for (EPC epcdata : list) {
             Map<String, Object> map = new HashMap<>();
             map.put(TagKey.ID, idcount);
             map.put(TagKey.EPC, epcdata.getEpc());
             map.put(TagKey.COUNT, epcdata.getCount());
+            JSONObject json = new JSONObject();
+            try {
+                json.put(TagKey.ID, idcount);
+                json.put(TagKey.EPC, epcdata.getEpc());
+                json.put(TagKey.COUNT, epcdata.getCount());
+                jsonArray.put(json);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             idcount++;
             listMap.add(map);
         }
-        uhfListener.onRead(listMap);
+
+
+        uhfListener.onRead(jsonArray.toString());
 
     }
 
