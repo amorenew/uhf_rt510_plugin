@@ -65,5 +65,5 @@ https://pub.dev/packages/uhf_plugin
         });
       }
    ```
-![alt text](https://github.com/amorenew/alps_uhf_flutter/raw/master/sample.png)
+![alt text](https://github.com/amorenew/alps_uhf_flutter/raw/master/sample1.png)
 
