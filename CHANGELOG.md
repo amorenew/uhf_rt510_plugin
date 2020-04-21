@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Added TagEpc object instead of string
+
 ## 1.0.0
 
 * Added Documentation

@@ -53,8 +53,17 @@ https://pub.dev/packages/uhf_plugin
 - Listen to connection status
 
    `UhfPlugin.connectedStatusStream.receiveBroadcastStream().listen(updateIsConnected);`
+   updateIsConnected should listen to bool value
 
 - Listen to tags status
 
    `UhfPlugin.tagsStatusStream.receiveBroadcastStream().listen(updateTags);`
+   ```dart  List<TagEpc> _data = [];
+      void updateTags(dynamic result) {
+       setState(() {
+           _data = TagEpc.parseTags(result);
+        });
+      }
+   ```
+![alt text](https://github.com/amorenew/alps_uhf_flutter/raw/master/sample.png)
 
