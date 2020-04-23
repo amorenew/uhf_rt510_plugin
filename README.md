@@ -58,7 +58,8 @@ https://pub.dev/packages/uhf_plugin
 - Listen to tags status
 
    `UhfPlugin.tagsStatusStream.receiveBroadcastStream().listen(updateTags);`
-   ```dart  List<TagEpc> _data = [];
+   ```dart
+      List<TagEpc> _data = [];
       void updateTags(dynamic result) {
        setState(() {
            _data = TagEpc.parseTags(result);

@@ -1,13 +1,7 @@
 package com.wiot.alps_ax6737.uhf_plugin;
 
-import android.content.Context;
-
-import com.handheld.TagKey;
 import com.handheld.UHFHelper;
 import com.handheld.UHFListener;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
@@ -51,11 +45,12 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
         initReadEvent(flutterPluginBinding.getBinaryMessenger());
 
         channel.setMethodCallHandler(new UHFPlugin());
-        UHFHelper.getInstance().init(flutterPluginBinding.getApplicationContext(), new UHFListener() {
+        UHFHelper.getInstance().init(new UHFListener() {
             @Override
             public void onRead(String tagsJson) {
 //                for (Map<String, Object> map : tagsList) {
 //                    String tag = TagKey.getTag(map);
+                if (tagsJson != null)
                     tagsStatus.onNext(tagsJson);
 //                }
             }
@@ -82,12 +77,13 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
         initReadEvent(registrar.messenger());
         channel.setMethodCallHandler(new UHFPlugin());
 
-        UHFHelper.getInstance().init(registrar.context(), new UHFListener() {
+        UHFHelper.getInstance().init(new UHFListener() {
             @Override
             public void onRead(String tagsJson) {
 //                for (Map<String, Object> map : tagsList) {
 //                    String tag = TagKey.getTag(map);
-                tagsStatus.onNext(tagsJson);
+                if (tagsJson != null)
+                    tagsStatus.onNext(tagsJson);
 //                }
             }
 
@@ -217,7 +213,6 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
             }
         });
     }
-
 
 
     @Override

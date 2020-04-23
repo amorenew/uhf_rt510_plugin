@@ -39,7 +39,7 @@ public class UHFHelper {
         return instance;
     }
 
-    public void init(Context context, UHFListener uhfListener) {
+    public void init(UHFListener uhfListener) {
         // this.context = context;
         this.uhfListener = uhfListener;
         this.myApp = new MyApplication();
@@ -167,7 +167,7 @@ public class UHFHelper {
             list.add(epcTag);
             myApp.addEPC(epc);
         }
-        ArrayList<Map<String, Object>> listMap = new ArrayList<>();
+        //    ArrayList<Map<String, Object>> listMap = new ArrayList<>();
         int idcount = 1;
 
         final JSONArray jsonArray = new JSONArray();
@@ -187,11 +187,10 @@ public class UHFHelper {
                 e.printStackTrace();
             }
             idcount++;
-            listMap.add(map);
+            //    listMap.add(map);
         }
 
-
-        uhfListener.onRead(jsonArray.toString());
+            uhfListener.onRead(jsonArray.toString());
 
     }
 
