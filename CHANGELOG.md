@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Minor gradle fix
+
 ## 1.0.2
 
 * Fix null exception
