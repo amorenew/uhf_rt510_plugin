@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:uhf_rt510_plugin/uhf_rt510_plugin.dart';
+import 'package:uhf_rt510_plugin/tag_epc.dart';
 
 void main() => runApp(MyApp());
 
