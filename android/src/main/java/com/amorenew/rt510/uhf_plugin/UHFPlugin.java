@@ -1,4 +1,4 @@
-package com.wiot.alps_ax6737.uhf_plugin;
+package com.amorenew.rt510.uhf_plugin;
 
 import com.handheld.UHFHelper;
 import com.handheld.UHFListener;
@@ -31,6 +31,8 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
     private static final String CHANNEL_Close = "close";
     private static final String CHANNEL_Connect = "connect";
     private static final String CHANNEL_IsConnected = "isConnected";
+    private static final String CHANNEL_SETPOWERLEVEL = "setPowerLevel";
+    private static final String CHANNEL_SETWORKAREA = "setWorkArea";
 
     private static PublishSubject<Boolean> connectedStatus = PublishSubject.create();
     private static PublishSubject<String> tagsStatus = PublishSubject.create();
@@ -98,11 +100,11 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-        handleMethods(call.method, result);
+        handleMethods(call, result);
     }
 
-    private void handleMethods(String method, Result result) {
-        switch (method) {
+    private void handleMethods(MethodCall call, Result result) {
+        switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
@@ -134,6 +136,14 @@ public class UHFPlugin implements FlutterPlugin, MethodCallHandler {
                 break;
             case CHANNEL_IsConnected:
                 result.success(UHFHelper.getInstance().isConnected());
+                break;
+            case CHANNEL_SETPOWERLEVEL:
+                String powerLevel = call.argument("value");
+                result.success(UHFHelper.getInstance().setPowerLevel(powerLevel));
+                break;
+            case CHANNEL_SETWORKAREA:
+                String workArea = call.argument("value");
+                result.success(UHFHelper.getInstance().setWorkArea(workArea));
                 break;
             default:
                 result.notImplemented();

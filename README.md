@@ -16,7 +16,7 @@ https://pub.dev/packages/uhf_plugin
     }`
 
 - Import the library:
-   `import 'package:uhf_plugin/uhf_plugin.dart';`
+   `import 'package:uhf_rt510_plugin/uhf_rt510_plugin.dart';`
 
 - Open connection to the UHF reader
 
@@ -66,5 +66,5 @@ https://pub.dev/packages/uhf_plugin
         });
       }
    ```
-![alt text](https://github.com/amorenew/alps_uhf_flutter/raw/master/sample1.png)
+![alt text](https://github.com/amorenew/uhf_rtf510_plugin/raw/master/sample1.png)
 

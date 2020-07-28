@@ -4,6 +4,8 @@ public class EPC {
     private int count;
     private String epc;
     private int id;
+    private int rssi;
+
     private boolean isFind;
 
     public boolean isFind() {
@@ -36,6 +38,14 @@ public class EPC {
 
     public void setCount(int count2) {
         this.count = count2;
+    }
+
+    public int getRssi() {
+        return this.rssi;
+    }
+
+    public void setRssi(int rssi2) {
+        this.rssi = rssi2;
     }
 
     public String toString() {

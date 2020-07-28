@@ -3,7 +3,7 @@ package com.android.hdhe.uhf.reader;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.newdata.com.android.hdhe.uhf.consts.Constants;
+import com.android.hdhe.uhf.consts.Constants;
 import com.android.hdhe.uhf.readerInterface.CommendManager;
 import com.android.hdhe.uhf.readerInterface.TagModel;
 

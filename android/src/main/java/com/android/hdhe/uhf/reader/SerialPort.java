@@ -1,4 +1,4 @@
-package com.newdata.com.android.hdhe.uhf.reader;
+package com.android.hdhe.uhf.reader;
 
 import android.util.Log;
 import java.io.FileDescriptor;

@@ -1,8 +1,7 @@
 package com.handheld;
 
-import android.content.Context;
-
-import com.handheld.UHFLonger.UHFLongerManager;
+import com.android.hdhe.uhf.reader.UhfReader;
+import com.android.hdhe.uhf.readerInterface.TagModel;
 import com.handheld.UHFLongerDemo.EPC;
 import com.handheld.UHFLongerDemo.MyApplication;
 
@@ -20,13 +19,14 @@ import java.util.TimerTask;
 public class UHFHelper {
     //private Context context;
     private static UHFHelper instance;
-    private UHFLongerManager manager;
+    private UhfReader manager;
     private MyApplication myApp;
     private boolean runFlag = true;
     private boolean startFlag = false;
     private ArrayList<EPC> listEPC;
     private UHFListener uhfListener;
-    private int signalPowerLevel = 30;//30 to 90
+    private int signalPowerLevel = 26;//16 to 26
+    private int areaType = 3;//Europe
     private boolean connectFlag = false;
 
     private UHFHelper() {
@@ -63,8 +63,8 @@ public class UHFHelper {
     }
 
     public void clearData() {
-        if (manager != null)
-            manager.clearSelect();
+        //if (manager != null)
+           // manager.unSelect();
 
         this.listEPC.clear();
         this.myApp.getListEpc().clear();
@@ -86,10 +86,10 @@ public class UHFHelper {
 
     public void connect() {
         try {
-            manager = UHFLongerManager.getInstance();
+            manager = UhfReader.getInstance();
             new Timer().schedule(new TimerTask() {
                 public void run() {
-                    if (manager != null && manager.setOutPower((short) signalPowerLevel)) {
+                    if (manager != null && manager.setOutputPower((short) signalPowerLevel)) {
                         connectFlag = true;
                         myApp.setmanager(manager);
                         uhfListener.onConnect(true, signalPowerLevel);
@@ -108,6 +108,20 @@ public class UHFHelper {
         return connectFlag && manager != null;
     }
 
+    public boolean setPowerLevel(String powerLevel) {
+        if (manager != null) {
+            return manager.setOutputPower(Integer.parseInt(powerLevel));
+        }
+        return false;
+    }
+
+    public int setWorkArea(String workArea) {
+        if (manager != null) {
+            return manager.setWorkArea(Integer.parseInt(workArea));
+        }
+        return -1;
+    }
+
 
     class InventoryThread extends Thread {
 
@@ -118,13 +132,13 @@ public class UHFHelper {
             super.run();
             while (runFlag) {
                 if (startFlag) {
-                    List<String> epcList = null;
+                    List<TagModel> epcList = null;
                     if (manager != null)
                         epcList = manager.inventoryRealTime();
                     if (epcList != null && !epcList.isEmpty()) {
                         //Util.play(1, 0);
-                        for (String epc : epcList) {
-                            addToList(listEPC, epc);
+                        for (TagModel epc : epcList) {
+                            addToList(listEPC, epc.getValue());
                         }
                     }
                     try {
@@ -190,7 +204,7 @@ public class UHFHelper {
             //    listMap.add(map);
         }
 
-            uhfListener.onRead(jsonArray.toString());
+        uhfListener.onRead(jsonArray.toString());
 
     }
 

@@ -1,4 +1,4 @@
-group 'com.wiot.alps_ax6737.uhf_plugin'
+group 'com.amorenew.rt510.uhf_plugin'
 version '1.0'
 
 buildscript {
@@ -32,7 +32,6 @@ android {
         disable 'InvalidPackage'
     }
 }
-
 
 dependencies {
     //rx Android for updating status

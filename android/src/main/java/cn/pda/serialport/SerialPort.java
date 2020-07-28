@@ -1,4 +1,4 @@
-package com.newdata.com.android.hdhe.uhf.reader;
+package cn.pda.serialport;
 
 import android.util.Log;
 import java.io.FileDescriptor;
@@ -10,22 +10,67 @@ import java.io.OutputStream;
 
 public class SerialPort {
     private static final String TAG = "SerialPort";
+    public static int TNCOM_EVENPARITY = 0;
+    public static int TNCOM_ODDPARITY = 1;
     private FileDescriptor mFd;
     private FileInputStream mFileInputStream;
     private FileOutputStream mFileOutputStream;
+    byte[] test;
     private boolean trig_on = false;
 
     private static native FileDescriptor open(int i, int i2);
 
+    private static native FileDescriptor open(int i, int i2, int i3);
+
     public native void close(int i);
+
+    public native void irdapoweroff();
+
+    public native void irdapoweron();
+
+    public native void power3v3off();
+
+    public native void power3v3on();
 
     public native void psampoweroff();
 
     public native void psampoweron();
 
+    public native void rfidPoweroff();
+
+    public native void rfidPoweron();
+
+    public native void scanerpoweroff();
+
+    public native void scanerpoweron();
+
+    public native void scanertrigeroff();
+
+    public native void scanertrigeron();
+
+    public native void setGPIOhigh(int i);
+
+    public native void setGPIOlow(int i);
+
+    public native void test(byte[] bArr);
+
+    public native void usbOTGpowerOff();
+
+    public native void usbOTGpowerOn();
+
+    public native void zigbeepoweroff();
+
+    public native void zigbeepoweron();
+
+    static {
+        System.loadLibrary("devapi");
+        System.loadLibrary("irdaSerialPort");
+    }
+
+    public SerialPort() {
+    }
+
     public SerialPort(int port, int baudrate, int flags) throws SecurityException, IOException {
-        Log.e("openserialport","port: "+port+" baudrate:"+baudrate);
-        psampoweron();
         this.mFd = open(port, baudrate);
         if (this.mFd == null) {
             Log.e(TAG, "native open returns null");
@@ -43,29 +88,58 @@ public class SerialPort {
         return this.mFileOutputStream;
     }
 
-    public void uhfPowerOn() {
-        psampoweron();
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        byte[] bytes = new byte[8];
-        try {
-            this.mFileInputStream.read(bytes);
-            System.out.println(new String(bytes));
-        } catch (IOException e2) {
-            e2.printStackTrace();
-        }
+    public void power_5Von() {
+        zigbeepoweron();
     }
 
-    public void uhfPowerOff() {
+    public void power_5Voff() {
+        zigbeepoweroff();
+    }
+
+    public void power_3v3on() {
+        power3v3on();
+    }
+
+    public void power_3v3off() {
+        power3v3off();
+    }
+
+    public void rfid_poweron() {
+        rfidPoweron();
+    }
+
+    public void rfid_poweroff() {
+        rfidPoweroff();
+    }
+
+    public void psam_poweron() {
+        psampoweron();
+    }
+
+    public void psam_poweroff() {
         psampoweroff();
     }
 
-    static {
-        System.loadLibrary("devapi");
-        System.loadLibrary("uhf");
-       // System.loadLibrary("libirdaSerialPort");
+    public void scaner_poweron() {
+        scanerpoweron();
+        scaner_trigoff();
+    }
+
+    public void scaner_poweroff() {
+        scanerpoweroff();
+    }
+
+    public void scaner_trigon() {
+        scanertrigeron();
+        this.trig_on = true;
+    }
+
+    public void scaner_trigoff() {
+        scanertrigeroff();
+        this.trig_on = false;
+    }
+
+    public boolean scaner_trig_stat() {
+        return this.trig_on;
     }
 }

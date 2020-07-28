@@ -1,9 +1,9 @@
-package com.cn.pda.serialport;
+package cn.pda.serialport;
 
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.newdata.com.android.hdhe.uhf.consts.Constants;
+import com.android.hdhe.uhf.consts.Constants;
 
 
 public class Tools {

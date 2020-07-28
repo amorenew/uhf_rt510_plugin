@@ -1,10 +1,10 @@
-name: uhf_plugin
-description: A flutter plugin for Tablet Alps ax6737 to read UHF Cards.
-version: 1.0.3
-homepage: https://github.com/amorenew/alps_uhf_flutter.git
+name: uhf_rt510_plugin
+description: A flutter plugin for UHF RT510 to read UHF Cards.
+version: 0.0.1
+homepage: https://github.com/amorenew/uhf_rtf510_plugin.git
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,7 +24,7 @@ flutter:
   # be modified. They are used by the tooling to maintain consistency when
   # adding or updating assets for this project.
   plugin:
-    androidPackage: com.wiot.alps_ax6737.uhf_plugin
+    androidPackage: com.amorenew.rt510.uhf_plugin
     pluginClass: UHFPlugin
 
   # To add assets to your plugin package, add an assets section, like this:

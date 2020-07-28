@@ -1,6 +1,7 @@
 package com.handheld.UHFLongerDemo;
 
-import com.handheld.UHFLonger.UHFLongerManager;
+import com.android.hdhe.uhf.reader.UhfReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,11 @@ public class MyApplication {
     public static MyApplication myapp;
     private List<String> listEpc = new ArrayList();
     private List<String> listInputEPC = new ArrayList();
-    private UHFLongerManager manager = null;
+    private UhfReader manager = null;
     private String password = null;
     private String selectEPC = null;
 
-    public UHFLongerManager getmanager() {
+    public UhfReader getmanager() {
         return this.manager;
     }
 
@@ -24,7 +25,7 @@ public class MyApplication {
         this.listInputEPC = listInputEPC2;
     }
 
-    public void setmanager(UHFLongerManager manager2) {
+    public void setmanager(UhfReader manager2) {
         this.manager = manager2;
     }
 
