@@ -110,7 +110,8 @@ public class UHFHelper {
 
     public boolean setPowerLevel(String powerLevel) {
         if (manager != null) {
-            return manager.setOutputPower(Integer.parseInt(powerLevel));
+            signalPowerLevel = Integer.parseInt(powerLevel);
+            return manager.setOutputPower(signalPowerLevel);
         }
         return false;
     }

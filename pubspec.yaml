@@ -1,6 +1,6 @@
 name: uhf_rt510_plugin
 description: A flutter plugin for UHF RT510 to read UHF Cards.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/amorenew/uhf_rt510_plugin.git
 
 environment:
